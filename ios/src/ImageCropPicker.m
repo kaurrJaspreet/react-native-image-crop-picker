@@ -870,16 +870,16 @@ RCT_EXPORT_METHOD(openCropper:(NSDictionary *)options
         if ([[[self options] objectForKey:@"cropperCircleOverlay"] boolValue]) {
             cropVC = [[TOCropViewController alloc] initWithCroppingStyle:TOCropViewCroppingStyleCircular image:image];
         } else {
-            // cropVC = [[TOCropViewController alloc] initWithImage:image];
-            // CGFloat widthRatio = [[self.options objectForKey:@"width"] floatValue];
-            // CGFloat heightRatio = [[self.options objectForKey:@"height"] floatValue];
-            // if (widthRatio > 0 && heightRatio > 0){
-            //     CGSize aspectRatio = CGSizeMake(widthRatio, heightRatio);
-            //     cropVC.customAspectRatio = aspectRatio;
+            cropVC = [[TOCropViewController alloc] initWithImage:image];
+            CGFloat widthRatio = [[self.options objectForKey:@"width"] floatValue];
+            CGFloat heightRatio = [[self.options objectForKey:@"height"] floatValue];
+            if (widthRatio > 0 && heightRatio > 0){
+                CGSize aspectRatio = CGSizeMake(widthRatio, heightRatio);
+                cropVC.customAspectRatio = aspectRatio;
                 
-            // }
-            // cropVC.aspectRatioLockEnabled = ![[self.options objectForKey:@"freeStyleCropEnabled"] boolValue];
-            // cropVC.resetAspectRatioEnabled = !cropVC.aspectRatioLockEnabled;
+            }
+            cropVC.aspectRatioLockEnabled = ![[self.options objectForKey:@"freeStyleCropEnabled"] boolValue];
+            cropVC.resetAspectRatioEnabled = !cropVC.aspectRatioLockEnabled;
         }
         
         cropVC.title = [[self options] objectForKey:@"cropperToolbarTitle"];
